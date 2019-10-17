@@ -63,12 +63,11 @@ open class BiometricManagerV23 {
                             super.onAuthenticationError(errMsgId, errString)
                             updateStatus(context!!.getString(R.string.biometric_failed))
                             biometricCallback.onAuthenticationError(errMsgId, errString ?: "")
-                            showPasswordButton()
                         }
 
                         override fun onAuthenticationHelp(helpMsgId: Int, helpString: CharSequence?) {
                             super.onAuthenticationHelp(helpMsgId, helpString)
-                            updateStatus(context!!.getString(R.string.biometric_failed))
+                            updateStatus(context!!.getString(R.string.biometric_failed), true)
                             biometricCallback.onAuthenticationHelp(helpMsgId, helpString ?: "")
                             showPasswordButton()
                         }
@@ -81,7 +80,7 @@ open class BiometricManagerV23 {
 
                         override fun onAuthenticationFailed() {
                             super.onAuthenticationFailed()
-                            updateStatus(context!!.getString(R.string.biometric_failed))
+                            updateStatus(context!!.getString(R.string.biometric_failed), true)
                             biometricCallback.onAuthenticationFailed()
                             showPasswordButton()
                         }
@@ -113,9 +112,9 @@ open class BiometricManagerV23 {
         }
     }
 
-    private fun updateStatus(status: String) {
+    private fun updateStatus(status: String, animation: Boolean = false) {
         if (biometricDialogV23 != null) {
-            biometricDialogV23!!.updateStatus(status)
+            biometricDialogV23!!.updateStatus(status, animation)
         }
     }
 

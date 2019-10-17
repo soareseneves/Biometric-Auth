@@ -52,7 +52,7 @@ class BiometricDialogV23 : BottomSheetDialog {
         btnUsePassword = findViewById(R.id.btn_usepassword)
         btnUsePassword!!.visibility = View.GONE
         btnUsePassword!!.setOnClickListener {
-            /*val keyguardManager = activityContext!!.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            val keyguardManager = activityContext!!.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             val credentialsIntent = keyguardManager.createConfirmDeviceCredentialIntent(
                     passwordViewTitle,
                     passwordViewDescription
@@ -62,7 +62,7 @@ class BiometricDialogV23 : BottomSheetDialog {
             } else {
                 dismiss()
                 biometricCallback.onAuthenticationHelp(100, "")
-            }*/
+            }
         }
 
         itemTitle = findViewById(R.id.item_title)
@@ -75,10 +75,12 @@ class BiometricDialogV23 : BottomSheetDialog {
         itemTitle!!.text = title
     }
 
-    fun updateStatus(status: String) {
+    fun updateStatus(status: String, animation: Boolean = false) {
         itemTitle!!.text = status
-        val shake = AnimationUtils.loadAnimation(activityContext, R.anim.shake)
-        itemTitle!!.startAnimation(shake)
+        if (animation) {
+            val shake = AnimationUtils.loadAnimation(activityContext, R.anim.shake)
+            itemTitle!!.startAnimation(shake)
+        }
     }
 
     fun showPasswordButton() {
