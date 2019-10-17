@@ -52,17 +52,17 @@ class BiometricDialogV23 : BottomSheetDialog {
         btnUsePassword = findViewById(R.id.btn_usepassword)
         btnUsePassword!!.visibility = View.GONE
         btnUsePassword!!.setOnClickListener {
-            val keyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            /*val keyguardManager = activityContext!!.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             val credentialsIntent = keyguardManager.createConfirmDeviceCredentialIntent(
                     passwordViewTitle,
                     passwordViewDescription
             )
             if (credentialsIntent != null) {
-                activityContext?.startActivityForResult(credentialsIntent, 4342)
+                activityContext!!.startActivityForResult(credentialsIntent, 4342)
             } else {
                 dismiss()
                 biometricCallback.onAuthenticationHelp(100, "")
-            }
+            }*/
         }
 
         itemTitle = findViewById(R.id.item_title)
