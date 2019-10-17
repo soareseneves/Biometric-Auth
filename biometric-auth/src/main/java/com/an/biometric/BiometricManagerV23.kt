@@ -62,12 +62,14 @@ open class BiometricManagerV23 {
                             super.onAuthenticationError(errMsgId, errString)
                             updateStatus(errString.toString())
                             biometricCallback.onAuthenticationError(errMsgId, errString ?: "")
+                            showPasswordButton()
                         }
 
                         override fun onAuthenticationHelp(helpMsgId: Int, helpString: CharSequence?) {
                             super.onAuthenticationHelp(helpMsgId, helpString)
                             updateStatus(helpString.toString())
                             biometricCallback.onAuthenticationHelp(helpMsgId, helpString ?: "")
+                            showPasswordButton()
                         }
 
                         override fun onAuthenticationSucceeded(result: FingerprintManagerCompat.AuthenticationResult?) {
@@ -81,6 +83,7 @@ open class BiometricManagerV23 {
                             super.onAuthenticationFailed()
                             updateStatus(context!!.getString(R.string.biometric_failed))
                             biometricCallback.onAuthenticationFailed()
+                            showPasswordButton()
                         }
                     },
                     null)
@@ -92,7 +95,7 @@ open class BiometricManagerV23 {
 
     private fun displayBiometricDialog(biometricCallback: BiometricCallback) {
         biometricDialogV23 = BiometricDialogV23(context!!, biometricCallback)
-        biometricDialogV23!!.setTitle(title)
+        biometricDialogV23!!.setTitleText(title ?: "")
         biometricDialogV23!!.setSubtitle(subtitle ?: "")
         biometricDialogV23!!.setDescription(description ?: "")
         biometricDialogV23!!.setNegativeButtonText(negativeButtonText ?: "")
@@ -111,6 +114,12 @@ open class BiometricManagerV23 {
     private fun updateStatus(status: String) {
         if (biometricDialogV23 != null) {
             biometricDialogV23!!.updateStatus(status)
+        }
+    }
+
+    private fun showPasswordButton() {
+        if (biometricDialogV23 != null) {
+            biometricDialogV23!!.showPasswordButton()
         }
     }
 

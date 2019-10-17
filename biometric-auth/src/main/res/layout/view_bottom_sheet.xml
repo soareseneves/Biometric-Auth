@@ -47,6 +47,7 @@
         android:layout_marginLeft="@dimen/margin_xsmall"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginRight="@dimen/margin_large"
+        android:textAlignment="center"
         android:textColor="@color/dialog_description" />
 
     <ImageView
@@ -79,7 +80,8 @@
         android:layout_marginTop="@dimen/margin_xxlarge"
         android:background="@null"
         android:paddingTop="@dimen/margin_xxlarge"
-        android:textColor="@color/dialog_cancel_btn" />
+        android:textColor="@color/dialog_usepassword_btn"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_cancel"
