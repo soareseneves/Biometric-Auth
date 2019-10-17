@@ -5,6 +5,7 @@ import android.app.KeyguardManager
 import android.content.Context
 import android.content.DialogInterface
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -56,15 +57,7 @@ class BiometricDialogV23 : BottomSheetDialog {
                     passwordViewDescription
             )
             if (credentialsIntent != null) {
-                activityContext?.startForResult(credentialsIntent){
-                    if(it.resultCode == RESULT_OK) {
-                        dismiss()
-                        biometricCallback.onAuthenticationSuccessful()
-                    } else {
-                        dismiss()
-                        biometricCallback.onAuthenticationError(100, "")
-                    }
-                }
+                activityContext?.startActivityForResult(credentialsIntent, 4342)
             } else {
                 dismiss()
                 biometricCallback.onAuthenticationHelp(100, "")
@@ -81,6 +74,8 @@ class BiometricDialogV23 : BottomSheetDialog {
 
     fun updateStatus(status: String) {
         itemTitle!!.text = status
+        val shake = AnimationUtils.loadAnimation(activityContext, R.anim.shake)
+        itemTitle!!.startAnimation(shake)
     }
 
     fun showPasswordButton() {

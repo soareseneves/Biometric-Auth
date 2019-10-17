@@ -55,10 +55,9 @@
         android:background="@drawable/button_top_bottom_border"
         android:paddingTop="@dimen/margin_xxsmall"
         android:paddingBottom="@dimen/margin_xxsmall"
-        android:text="Use Password"
         android:textAlignment="center"
         android:textColor="@color/dialog_usepassword_btn"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btn_cancel"
@@ -68,7 +67,6 @@
         android:background="@null"
         android:paddingTop="@dimen/margin_xxsmall"
         android:paddingBottom="@dimen/margin_xxsmall"
-        android:text="@android:string/cancel"
         android:textColor="@color/dialog_cancel_btn" />
 
 </RelativeLayout>
