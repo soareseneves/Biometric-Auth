@@ -125,6 +125,16 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
             return this
         }
 
+        fun setPasswordViewTitle(passwordViewTitle: String): BiometricBuilder {
+            this.passwordViewTitle = passwordViewTitle
+            return this
+        }
+
+        fun setPasswordViewDescription(passwordViewDescription: String): BiometricBuilder {
+            this.passwordViewDescription = passwordViewDescription
+            return this
+        }
+
         fun build(): BiometricManager {
             return BiometricManager(this, activity)
         }
