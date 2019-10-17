@@ -82,6 +82,10 @@ class BiometricDialogV23 : BottomSheetDialog {
         btnUsePassword!!.visibility = View.VISIBLE
     }
 
+    fun hidePasswordButton() {
+        btnUsePassword!!.visibility = View.GONE
+    }
+
     fun setSubtitle(subtitle: String) {
         itemSubtitle!!.text = subtitle
     }
