@@ -30,16 +30,19 @@
             android:id="@+id/item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/dialog_title"
-            android:textSize="18dp" />
+            android:textSize="19dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xxsmall"
+            android:textAlignment="center"
             android:textColor="@color/dialog_subtitle"
-            android:textSize="13dp" />
+            android:textSize="14dp" />
     </LinearLayout>
 
 
@@ -49,8 +52,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title_view"
         android:layout_marginTop="@dimen/margin_xxlarge"
-        android:background="@null"
-        android:paddingTop="@dimen/margin_xxlarge"
+        android:background="@drawable/button_top_bottom_border"
+        android:paddingTop="@dimen/margin_xxsmall"
+        android:paddingBottom="@dimen/margin_xxsmall"
+        android:text="Use Password"
+        android:textAlignment="center"
         android:textColor="@color/dialog_usepassword_btn"
         android:visibility="visible" />
 
@@ -59,9 +65,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_usepassword"
-        android:layout_marginTop="@dimen/margin_xxlarge"
         android:background="@null"
-        android:paddingTop="@dimen/margin_xxlarge"
+        android:paddingTop="@dimen/margin_xxsmall"
+        android:paddingBottom="@dimen/margin_xxsmall"
+        android:text="@android:string/cancel"
         android:textColor="@color/dialog_cancel_btn" />
 
 </RelativeLayout>
