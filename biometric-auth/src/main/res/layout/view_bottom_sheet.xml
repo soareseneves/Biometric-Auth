@@ -55,14 +55,14 @@
         android:paddingBottom="@dimen/margin_xxsmall"
         android:textAlignment="center"
         android:textColor="@color/dialog_usepassword_btn"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_usepassword"
-        android:background="@null"
+        android:background="@drawable/button_top_bottom_border"
         android:paddingTop="@dimen/margin_xxsmall"
         android:paddingBottom="@dimen/margin_xxsmall"
         android:textColor="@color/dialog_cancel_btn" />

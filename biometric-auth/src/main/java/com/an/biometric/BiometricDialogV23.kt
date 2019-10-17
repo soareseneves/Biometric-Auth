@@ -76,6 +76,7 @@ class BiometricDialogV23 : BottomSheetDialog {
         itemTitle!!.text = status
         val shake = AnimationUtils.loadAnimation(activityContext, R.anim.shake)
         itemTitle!!.startAnimation(shake)
+        itemTitle!!.clearAnimation()
     }
 
     fun showPasswordButton() {
