@@ -44,7 +44,7 @@ class BiometricDialogV23 : BottomSheetDialog {
 
         btnCancel = findViewById(R.id.btn_cancel)
         btnCancel!!.setOnClickListener {
-            dismiss()
+            cancel()
             hidePasswordButton()
             biometricCallback.onAuthenticationCancelled()
         }
