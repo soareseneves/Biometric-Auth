@@ -66,6 +66,10 @@ class BiometricDialogV23 : BottomSheetDialog {
 
         itemTitle = findViewById(R.id.item_title)
         itemSubtitle = findViewById(R.id.item_subtitle)
+
+        this.setOnDismissListener {
+            biometricCallback.onAuthenticationCancelled()
+        }
     }
 
     fun setTitleText(title: String) {
