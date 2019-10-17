@@ -41,7 +41,6 @@ open class BiometricManagerV23 {
 
     protected var title: String? = null
     protected var subtitle: String? = null
-    protected var description: String? = null
     protected var negativeButtonText: String? = null
     protected var positiveButtonText: String? = null
     protected var passwordViewTitle: String? = null

@@ -18,7 +18,6 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
         this.activity = activity
         this.title = biometricBuilder.title
         this.subtitle = biometricBuilder.subtitle
-        this.description = biometricBuilder.description
         this.negativeButtonText = biometricBuilder.negativeButtonText
         this.positiveButtonText = biometricBuilder.positiveButtonText
         this.passwordViewTitle = biometricBuilder.passwordViewTitle
@@ -39,17 +38,10 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
             return
         }
 
-
-        if (description == null) {
-            biometricCallback.onBiometricAuthenticationInternalError("Biometric Dialog description cannot be null")
-            return
-        }
-
         if (negativeButtonText == null) {
             biometricCallback.onBiometricAuthenticationInternalError("Biometric Dialog negative button text cannot be null")
             return
         }
-
 
         if (!BiometricUtils.isSdkVersionSupported) {
             biometricCallback.onSdkVersionNotSupported()
@@ -93,7 +85,6 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
 
         var title: String? = null
         var subtitle: String? = null
-        var description: String? = null
         var negativeButtonText: String? = null
         var positiveButtonText: String? = null
         var passwordViewTitle: String? = null
@@ -108,12 +99,6 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
             this.subtitle = subtitle
             return this
         }
-
-        fun setDescription(description: String): BiometricBuilder {
-            this.description = description
-            return this
-        }
-
 
         fun setNegativeButtonText(negativeButtonText: String): BiometricBuilder {
             this.negativeButtonText = negativeButtonText
