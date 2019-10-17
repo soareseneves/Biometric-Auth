@@ -4,14 +4,8 @@ import android.app.Activity.RESULT_OK
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.github.florent37.inlineactivityresult.kotlin.startForResult
@@ -22,31 +16,28 @@ class BiometricDialogV23 : BottomSheetDialog {
 
     private var btnCancel: Button? = null
     private var btnUsePassword: Button? = null
-    private var imgLogo: ImageView? = null
     private var itemTitle: TextView? = null
-    private var itemDescription: TextView? = null
     private var itemSubtitle: TextView? = null
-    private var itemStatus: TextView? = null
     private var activityContext: AppCompatActivity? = null
 
     private lateinit var biometricCallback: BiometricCallback
 
-    constructor(context: Context) : super(context, R.style.BottomSheetDialogTheme) {
+    constructor(context: Context, passwordViewTitle : String, passwordViewDescription : String) : super(context, R.style.BottomSheetDialogTheme) {
         //this.context = context.applicationContext
-        setDialogView()
+        setDialogView(passwordViewTitle, passwordViewDescription)
     }
 
-    constructor(context: Context, biometricCallback: BiometricCallback) : super(context, R.style.BottomSheetDialogTheme) {
+    constructor(context: Context, biometricCallback: BiometricCallback, passwordViewTitle : String, passwordViewDescription : String) : super(context, R.style.BottomSheetDialogTheme) {
         //this.context = context.applicationContext
         this.biometricCallback = biometricCallback
-        setDialogView()
+        setDialogView(passwordViewTitle, passwordViewDescription)
     }
 
     constructor(context: Context, theme: Int) : super(context, theme) {}
 
     protected constructor(context: Context, cancelable: Boolean, cancelListener: DialogInterface.OnCancelListener) : super(context, cancelable, cancelListener) {}
 
-    private fun setDialogView() {
+    private fun setDialogView(passwordViewTitle: String, passwordViewDescription: String) {
         val bottomSheetView = layoutInflater.inflate(R.layout.view_bottom_sheet, null)
         setContentView(bottomSheetView)
 
@@ -61,8 +52,8 @@ class BiometricDialogV23 : BottomSheetDialog {
         btnUsePassword!!.setOnClickListener {
             val keyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             val credentialsIntent = keyguardManager.createConfirmDeviceCredentialIntent(
-                    "Password required",
-                    "please enter your pattern to receive your token"
+                    passwordViewTitle,
+                    passwordViewDescription
             )
             if (credentialsIntent != null) {
                 activityContext?.startForResult(credentialsIntent){
@@ -70,21 +61,18 @@ class BiometricDialogV23 : BottomSheetDialog {
                         dismiss()
                         biometricCallback.onAuthenticationSuccessful()
                     } else {
-                        biometricCallback.onAuthenticationError(100, "Invalid Password")
+                        dismiss()
+                        biometricCallback.onAuthenticationError(100, "")
                     }
                 }
             } else {
-                biometricCallback.onAuthenticationHelp(100, "Senha não necessária")
+                dismiss()
+                biometricCallback.onAuthenticationHelp(100, "")
             }
         }
 
-        imgLogo = findViewById(R.id.img_logo)
         itemTitle = findViewById(R.id.item_title)
-        itemStatus = findViewById(R.id.item_status)
         itemSubtitle = findViewById(R.id.item_subtitle)
-        itemDescription = findViewById(R.id.item_description)
-
-        updateLogo()
     }
 
     fun setTitleText(title: String) {
@@ -92,7 +80,7 @@ class BiometricDialogV23 : BottomSheetDialog {
     }
 
     fun updateStatus(status: String) {
-        itemStatus!!.text = status
+        itemTitle!!.text = status
     }
 
     fun showPasswordButton() {
@@ -101,14 +89,6 @@ class BiometricDialogV23 : BottomSheetDialog {
 
     fun setSubtitle(subtitle: String) {
         itemSubtitle!!.text = subtitle
-    }
-
-    fun setDescription(description: String) {
-        if (description.isEmpty()){
-            itemDescription!!.visibility = View.GONE
-        } else {
-            itemDescription!!.text = description
-        }
     }
 
     fun setNegativeButtonText(negativeButtonText: String) {
@@ -121,17 +101,6 @@ class BiometricDialogV23 : BottomSheetDialog {
 
     fun setActivityContext(activityContext: AppCompatActivity) {
         this.activityContext = activityContext
-    }
-
-    private fun updateLogo() {
-        try {
-            val drawable = context.packageManager.getApplicationIcon(context.packageName)
-            imgLogo!!.setImageDrawable(drawable)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
     }
 
 }

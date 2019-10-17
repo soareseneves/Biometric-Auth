@@ -44,6 +44,8 @@ open class BiometricManagerV23 {
     protected var description: String? = null
     protected var negativeButtonText: String? = null
     protected var positiveButtonText: String? = null
+    protected var passwordViewTitle: String? = null
+    protected var passwordViewDescription: String? = null
     private var biometricDialogV23: BiometricDialogV23? = null
     protected var mCancellationSignalV23 = CancellationSignal()
 
@@ -60,14 +62,14 @@ open class BiometricManagerV23 {
                     object : FingerprintManagerCompat.AuthenticationCallback() {
                         override fun onAuthenticationError(errMsgId: Int, errString: CharSequence?) {
                             super.onAuthenticationError(errMsgId, errString)
-                            updateStatus(errString.toString())
+                            updateStatus(context!!.getString(R.string.biometric_failed))
                             biometricCallback.onAuthenticationError(errMsgId, errString ?: "")
                             showPasswordButton()
                         }
 
                         override fun onAuthenticationHelp(helpMsgId: Int, helpString: CharSequence?) {
                             super.onAuthenticationHelp(helpMsgId, helpString)
-                            updateStatus(helpString.toString())
+                            updateStatus(context!!.getString(R.string.biometric_failed))
                             biometricCallback.onAuthenticationHelp(helpMsgId, helpString ?: "")
                             showPasswordButton()
                         }
@@ -94,10 +96,9 @@ open class BiometricManagerV23 {
 
 
     private fun displayBiometricDialog(biometricCallback: BiometricCallback) {
-        biometricDialogV23 = BiometricDialogV23(context!!, biometricCallback)
+        biometricDialogV23 = BiometricDialogV23(context!!, biometricCallback, passwordViewTitle ?: "", passwordViewDescription ?: "")
         biometricDialogV23!!.setTitleText(title ?: "")
         biometricDialogV23!!.setSubtitle(subtitle ?: "")
-        biometricDialogV23!!.setDescription(description ?: "")
         biometricDialogV23!!.setNegativeButtonText(negativeButtonText ?: "")
         biometricDialogV23!!.setPositiveButtonText(positiveButtonText ?: "")
         biometricDialogV23!!.setActivityContext(activity!!)

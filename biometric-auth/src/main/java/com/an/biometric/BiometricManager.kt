@@ -21,6 +21,8 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
         this.description = biometricBuilder.description
         this.negativeButtonText = biometricBuilder.negativeButtonText
         this.positiveButtonText = biometricBuilder.positiveButtonText
+        this.passwordViewTitle = biometricBuilder.passwordViewTitle
+        this.passwordViewDescription = biometricBuilder.passwordViewDescription
     }
 
 
@@ -94,6 +96,8 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
         var description: String? = null
         var negativeButtonText: String? = null
         var positiveButtonText: String? = null
+        var passwordViewTitle: String? = null
+        var passwordViewDescription: String? = null
 
         fun setTitle(title: String): BiometricBuilder {
             this.title = title
