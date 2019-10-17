@@ -52,17 +52,17 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder)
             return
         }
 
-        if (!BiometricUtils.isPermissionGranted(context)) {
+        if (!BiometricUtils.isPermissionGranted(context!!)) {
             biometricCallback.onBiometricAuthenticationPermissionNotGranted()
             return
         }
 
-        if (!BiometricUtils.isHardwareSupported(context)) {
+        if (!BiometricUtils.isHardwareSupported(context!!)) {
             biometricCallback.onBiometricAuthenticationNotSupported()
             return
         }
 
-        if (!BiometricUtils.isFingerprintAvailable(context)) {
+        if (!BiometricUtils.isFingerprintAvailable(context!!)) {
             biometricCallback.onBiometricAuthenticationNotAvailable()
             return
         }
@@ -85,13 +85,13 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder)
         displayBiometricPromptV23(biometricCallback)
     }
 
-    class BiometricBuilder(private val context: Context) {
+    class BiometricBuilder(val context: Context) {
 
-        private var title: String? = null
-        private var subtitle: String? = null
-        private var description: String? = null
-        private var negativeButtonText: String? = null
-        private var positiveButtonText: String? = null
+        var title: String? = null
+        var subtitle: String? = null
+        var description: String? = null
+        var negativeButtonText: String? = null
+        var positiveButtonText: String? = null
 
         fun setTitle(title: String): BiometricBuilder {
             this.title = title
