@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 class BiometricManager protected constructor(biometricBuilder: BiometricBuilder, activity: AppCompatActivity) : BiometricManagerV23() {
 
-
     protected var mCancellationSignal = CancellationSignal()
+    protected var biometricDialog : BiometricDialogV23? = null
 
     init {
         this.context = biometricBuilder.context
@@ -23,7 +23,6 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
         this.passwordViewTitle = biometricBuilder.passwordViewTitle
         this.passwordViewDescription = biometricBuilder.passwordViewDescription
     }
-
 
     fun authenticate(biometricCallback: BiometricCallback) {
 
@@ -63,7 +62,7 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
             return
         }
 
-        displayBiometricDialog(biometricCallback)
+        this.biometricDialog = displayBiometricDialog(biometricCallback)
     }
 
     fun cancelAuthentication() {
@@ -76,9 +75,13 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder,
         }
     }
 
+    fun dismiss() {
+        biometricDialog?.dismiss()
+    }
 
-    private fun displayBiometricDialog(biometricCallback: BiometricCallback) {
-        displayBiometricPromptV23(biometricCallback)
+
+    private fun displayBiometricDialog(biometricCallback: BiometricCallback) : BiometricDialogV23? {
+        return displayBiometricPromptV23(biometricCallback)
     }
 
     class BiometricBuilder(val context: Context, val activity: AppCompatActivity) {

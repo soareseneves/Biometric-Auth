@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_bottom_sheet"
-    android:orientation="vertical"
-    android:padding="15dp">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/img_fingerprint"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_xxsmall"
+        android:layout_marginTop="@dimen/margin_small"
         android:background="@drawable/bg_fingerprint"
         android:padding="5dp"
         android:src="@drawable/ic_fingerprint" />

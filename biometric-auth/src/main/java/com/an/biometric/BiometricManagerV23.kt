@@ -49,7 +49,7 @@ open class BiometricManagerV23 {
     protected var mCancellationSignalV23 = CancellationSignal()
 
 
-    fun displayBiometricPromptV23(biometricCallback: BiometricCallback) {
+    fun displayBiometricPromptV23(biometricCallback: BiometricCallback) :  BiometricDialogV23?{
         generateKey()
 
         if (initCipher()) {
@@ -89,12 +89,14 @@ open class BiometricManagerV23 {
                     },
                     null)
 
-            displayBiometricDialog(biometricCallback)
+            return displayBiometricDialog(biometricCallback)
         }
+
+        return null
     }
 
 
-    private fun displayBiometricDialog(biometricCallback: BiometricCallback) {
+    private fun displayBiometricDialog(biometricCallback: BiometricCallback) : BiometricDialogV23 {
         biometricDialogV23 = BiometricDialogV23(context!!, biometricCallback, passwordViewTitle ?: "", passwordViewDescription ?: "")
         biometricDialogV23!!.setTitleText(title ?: "")
         biometricDialogV23!!.setSubtitle(subtitle ?: "")
@@ -102,6 +104,7 @@ open class BiometricManagerV23 {
         biometricDialogV23!!.setPositiveButtonText(positiveButtonText ?: "")
         biometricDialogV23!!.setActivityContext(activity!!)
         biometricDialogV23!!.show()
+        return biometricDialogV23!!
     }
 
 
