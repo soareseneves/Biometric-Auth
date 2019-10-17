@@ -79,7 +79,6 @@ open class BiometricManagerV23 {
                             biometricCallback.onAuthenticationSuccessful()
                         }
 
-
                         override fun onAuthenticationFailed() {
                             super.onAuthenticationFailed()
                             updateStatus(context!!.getString(R.string.biometric_failed))
@@ -103,7 +102,6 @@ open class BiometricManagerV23 {
         biometricDialogV23!!.setNegativeButtonText(negativeButtonText ?: "")
         biometricDialogV23!!.setPositiveButtonText(positiveButtonText ?: "")
         biometricDialogV23!!.setActivityContext(activity!!)
-        biometricDialogV23!!.hidePasswordButton()
         biometricDialogV23!!.show()
         return biometricDialogV23!!
     }
