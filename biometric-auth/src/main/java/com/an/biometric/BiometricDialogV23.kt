@@ -27,6 +27,7 @@ class BiometricDialogV23 : BottomSheetDialog {
     private var itemDescription: TextView? = null
     private var itemSubtitle: TextView? = null
     private var itemStatus: TextView? = null
+    private var activityContext: AppCompatActivity? = null
 
     private lateinit var biometricCallback: BiometricCallback
 
@@ -63,7 +64,7 @@ class BiometricDialogV23 : BottomSheetDialog {
                     "please enter your pattern to receive your token"
             )
             if (credentialsIntent != null) {
-                (context as AppCompatActivity).startForResult(credentialsIntent){
+                activityContext?.startForResult(credentialsIntent){
                     if(it.resultCode == RESULT_OK) {
                         dismiss()
                         biometricCallback.onAuthenticationSuccessful()
@@ -109,20 +110,19 @@ class BiometricDialogV23 : BottomSheetDialog {
         btnUsePassword!!.text = positiveButtonText
     }
 
+    fun setActivityContext(activityContext: AppCompatActivity) {
+        this.activityContext = activityContext
+    }
+
     private fun updateLogo() {
         try {
-            val drawable = getContext().packageManager.getApplicationIcon(context!!.packageName)
+            val drawable = context.packageManager.getApplicationIcon(context.packageName)
             imgLogo!!.setImageDrawable(drawable)
 
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
-    }
-
-    companion object {
-
-        private val CREDENTIALS_RESULT = 4342
     }
 
 }

@@ -6,6 +6,7 @@ import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
+import androidx.appcompat.app.AppCompatActivity
 
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -35,8 +36,8 @@ open class BiometricManagerV23 {
     private var keyGenerator: KeyGenerator? = null
     private var cryptoObject: FingerprintManagerCompat.CryptoObject? = null
 
-
     protected var context: Context? = null
+    protected var activity: AppCompatActivity? = null
 
     protected var title: String? = null
     protected var subtitle: String? = null
@@ -96,6 +97,7 @@ open class BiometricManagerV23 {
         biometricDialogV23!!.setDescription(description ?: "")
         biometricDialogV23!!.setNegativeButtonText(negativeButtonText ?: "")
         biometricDialogV23!!.setPositiveButtonText(positiveButtonText ?: "")
+        biometricDialogV23!!.setActivityContext(activity!!)
         biometricDialogV23!!.show()
     }
 

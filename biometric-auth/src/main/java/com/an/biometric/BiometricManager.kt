@@ -6,19 +6,21 @@ import android.content.DialogInterface
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.CancellationSignal
+import androidx.appcompat.app.AppCompatActivity
 
-class BiometricManager protected constructor(biometricBuilder: BiometricBuilder) : BiometricManagerV23() {
+class BiometricManager protected constructor(biometricBuilder: BiometricBuilder, activity: AppCompatActivity) : BiometricManagerV23() {
 
 
     protected var mCancellationSignal = CancellationSignal()
 
     init {
         this.context = biometricBuilder.context
+        this.activity = activity
         this.title = biometricBuilder.title
         this.subtitle = biometricBuilder.subtitle
         this.description = biometricBuilder.description
         this.negativeButtonText = biometricBuilder.negativeButtonText
-        this.positiveButtonText = biometricBuilder.negativeButtonText
+        this.positiveButtonText = biometricBuilder.positiveButtonText
     }
 
 
@@ -85,7 +87,7 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder)
         displayBiometricPromptV23(biometricCallback)
     }
 
-    class BiometricBuilder(val context: Context) {
+    class BiometricBuilder(val context: Context, val activity: AppCompatActivity) {
 
         var title: String? = null
         var subtitle: String? = null
@@ -120,7 +122,7 @@ class BiometricManager protected constructor(biometricBuilder: BiometricBuilder)
         }
 
         fun build(): BiometricManager {
-            return BiometricManager(this)
+            return BiometricManager(this, activity)
         }
     }
 }
