@@ -79,8 +79,7 @@
         android:layout_marginTop="@dimen/margin_xxlarge"
         android:background="@null"
         android:paddingTop="@dimen/margin_xxlarge"
-        android:textColor="@color/dialog_cancel_btn"
-        android:visibility="gone" />
+        android:textColor="@color/dialog_cancel_btn" />
 
     <Button
         android:id="@+id/btn_cancel"
